@@ -253,3 +253,71 @@ export interface GetMandateAccountBalanceResponse {
     balance: number;
   };
 }
+
+interface MandateDetail {
+  id: number;
+  amount: string;
+  mandate_id: number;
+  mandate_account_name: string;
+  mandate_account_number: string;
+  mandate_bvn: string;
+  reference: string;
+  narration: string;
+  session_id: string;
+  status: string;
+  created_on: string;
+  mandate_bank: MandateBank | Bank;
+  mandate: MandateReference;
+}
+
+interface MandateBank {
+  name: string;
+  bank_code: string;
+  institution_code: string;
+  url: string | null;
+}
+
+interface MandateReference {
+  reference_number: string;
+}
+
+interface MandateData {
+  data: MandateDetail[];
+  meta: {
+    records: number;
+    page: string;
+    pages: number;
+    page_size: string;
+  };
+}
+
+export interface GetAllMandateTransactionResponse {
+  status: string;
+  message: string;
+  data: MandateData;
+  meta: Meta;
+}
+
+export interface GetMandateTransactionDetailsResponse {
+  status: string;
+  message: string;
+  data: MandateData;
+  meta: Meta;
+}
+
+interface TransactionDetail {
+  status: string;
+  count: number;
+  sum: string;
+}
+
+interface TransactionsData {
+  transactions: TransactionDetail[];
+}
+
+export interface GetMandateTranscationStatsResponse {
+  status: string;
+  message: string;
+  data: TransactionsData;
+  meta: Meta;
+}

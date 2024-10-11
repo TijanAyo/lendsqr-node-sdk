@@ -8,10 +8,13 @@ import {
   CreateMandateResponse,
   DebitMandateResponse,
   GetAllBanksResponse,
+  GetAllMandateTransactionResponse,
   GetBankDetailsResponse,
   GetMandateAccountBalanceResponse,
   GetMandateDetailsResponse,
   GetMandateSummaryResponse,
+  GetMandateTransactionDetailsResponse,
+  GetMandateTranscationStatsResponse,
   VerifyAccountNumberPayload,
   VerifyAccountNumberResponse,
 } from "../interfaces";
@@ -224,5 +227,56 @@ export class DirectDebit extends BaseResource {
       undefined,
       payload
     );
+  }
+
+  /**
+   * Retrieve the transactions related to the mandates associated
+   * @param {number} limit
+   * @param {number} page
+   * @returns {Promise<GetAllMandateTransactionResponse>}
+   */
+  async getAllMandateTransactions(
+    limit: number = 10,
+    page: number = 1
+  ): Promise<GetAllMandateTransactionResponse> {
+    const path = `/direct-debit/transactions`;
+
+    const params = {
+      limit,
+      page,
+    };
+
+    return this.request<GetAllMandateTransactionResponse>("GET", path, params);
+  }
+
+  /**
+   * Retrieves the details of a specific transaction
+   * @param {string} reference
+   * @returns {Promise<GetMandateTransactionDetailsResponse>}
+   */
+  async getMandateTransactionDetails(
+    reference: string
+  ): Promise<GetMandateTransactionDetailsResponse> {
+    const path = `/direct-debit/transactions`;
+
+    const params = {
+      reference,
+    };
+
+    return this.request<GetMandateTransactionDetailsResponse>(
+      "GET",
+      path,
+      params
+    );
+  }
+
+  /**
+   * Retrieves the status of transactions
+   * @returns {Promise<GetMandateTranscationStatsResponse>}
+   */
+  async getMandateTransactionStats(): Promise<GetMandateTranscationStatsResponse> {
+    const path = `/direct-debit/transactions/stats`;
+
+    return this.request<GetMandateTranscationStatsResponse>("GET", path);
   }
 }
