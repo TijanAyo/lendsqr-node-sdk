@@ -1,4 +1,3 @@
-import { injectable } from "tsyringe";
 import { BaseResource } from "./base";
 import {
   CheckCustomerInEcosystemResponse,
@@ -12,7 +11,6 @@ import {
   VerifyCustomerNINResponse,
 } from "../interfaces";
 
-@injectable()
 export class Validation extends BaseResource {
   /**
    * Allows for real-time verification of an individual's Bank Verification Number (BVN)

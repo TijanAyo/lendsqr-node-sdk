@@ -1,7 +1,5 @@
-import "reflect-metadata";
-
 import axios, { AxiosInstance } from "axios";
-import { injectable } from "tsyringe";
+
 import { LendSqrAPIError } from "./utils";
 import {
   CreditBureaus,
@@ -12,7 +10,6 @@ import {
   Validation,
 } from "./resources";
 
-@injectable()
 export class Lendsqr {
   private axiosInstance: AxiosInstance;
   public creditBureaus: CreditBureaus;

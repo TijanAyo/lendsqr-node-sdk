@@ -1,7 +1,5 @@
-import { injectable } from "tsyringe";
 import { Lendsqr } from "../main";
 
-@injectable()
 export class BaseResource {
   constructor(protected client: Lendsqr) {}
 

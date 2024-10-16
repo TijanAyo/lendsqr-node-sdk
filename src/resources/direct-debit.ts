@@ -1,5 +1,3 @@
-import { injectable } from "tsyringe";
-
 import { BaseResource } from "./base";
 import {
   CancelMandateResponse,
@@ -19,7 +17,6 @@ import {
   VerifyAccountNumberResponse,
 } from "../interfaces";
 
-@injectable()
 export class DirectDebit extends BaseResource {
   /**
    * Returns the lis of banks able to provide direct debit authorizations

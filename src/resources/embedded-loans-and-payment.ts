@@ -1,5 +1,3 @@
-import { injectable } from "tsyringe";
-
 import { BaseResource } from "./base";
 import {
   GetLoanDetailsResponse,
@@ -11,7 +9,6 @@ import {
   QueryPaymentResponse,
 } from "../interfaces";
 
-@injectable()
 export class EmbeddedLoansAndPayments extends BaseResource {
   /**
    * Retrieve all the loan products a distributor is subscribed to

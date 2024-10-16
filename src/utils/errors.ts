@@ -1,8 +1,5 @@
-import { injectable } from "tsyringe";
-
 import { AxiosError } from "axios";
 
-@injectable()
 export class LendSqrAPIError extends Error {
   status?: number;
   data?: any;

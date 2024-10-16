@@ -1,5 +1,3 @@
-import { injectable } from "tsyringe";
-
 import { BaseResource } from "./base";
 import {
   GetDecisionModelDetails,
@@ -8,7 +6,6 @@ import {
   OraculiBorrowerScoringResponse,
 } from "../interfaces";
 
-@injectable()
 export class Decisioning extends BaseResource {
   /**
    * Fetches all the decision models that have been configured for your profile

@@ -1,12 +1,9 @@
-import { injectable } from "tsyringe";
-
 import { BaseResource } from "./base";
 import {
   GetCreditReportFromCRC,
   GetCreditReportFromFirstCentral,
 } from "../interfaces";
 
-@injectable()
 export class CreditBureaus extends BaseResource {
   /**
    * Check the CRC database for the credit history of a customer using their BVN
