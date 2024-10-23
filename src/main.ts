@@ -10,6 +10,11 @@ import {
   Validation,
 } from "./resources";
 
+interface LendsqrOptions {
+  token: string;
+  version?: string;
+}
+
 export class Lendsqr {
   private axiosInstance: AxiosInstance;
   public creditBureaus: CreditBureaus;
@@ -19,14 +24,14 @@ export class Lendsqr {
   public embeddedLoansAndPayment: EmbeddedLoansAndPayments;
   public validation: Validation;
 
-  constructor(
-    private token: string,
-    private baseURL: string = `https://adjutor.lendsqr.com/v2`
-  ) {
+  constructor(options: LendsqrOptions) {
+    const { token, version = "v2" } = options;
+    const baseURL = `https://adjutor.lendsqr.com/${version}`;
+
     this.axiosInstance = axios.create({
-      baseURL: this.baseURL,
+      baseURL: baseURL,
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -50,6 +55,11 @@ export class Lendsqr {
       const response = await this.axiosInstance.request<T>(config);
       return response.data;
     } catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          return error.response.data;
+        }
+      }
       throw new LendSqrAPIError(error);
     }
   }
