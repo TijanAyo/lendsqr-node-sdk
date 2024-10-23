@@ -69,7 +69,7 @@ export class EmbeddedLoansAndPayments extends BaseResource {
     const path = `payments/initialize`;
 
     const payload = {
-      amout: data.amount,
+      amount: data.amount,
       description: data.description,
       callback_url: data.callback_url,
       organization_id: data.organization_id,

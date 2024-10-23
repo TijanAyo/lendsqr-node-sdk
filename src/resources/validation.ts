@@ -17,17 +17,17 @@ export class Validation extends BaseResource {
    * through the comparison of their photograph and facial features with their BVN record.
    *
    * @param {string} bvn
-   * @param {string} imageUrl
+   * @param {string} imageURL
    * @returns {Promise<MatchCustomerBVNImageResponse>}
    */
   async matchCustomerBVNImage(
     bvn: string,
-    imageUrl: string
+    imageURL: string
   ): Promise<MatchCustomerBVNImageResponse> {
     const path = `/verification/bvn/${bvn}/selfies`;
 
     const payload = {
-      image: imageUrl,
+      image: imageURL,
     };
 
     return this.request<MatchCustomerBVNImageResponse>(
@@ -66,7 +66,7 @@ export class Validation extends BaseResource {
 
   /**
    * Check if a customer is on the blacklist of bad actors
-   * @param {string} identity
+   * @param {string} identity - Identity of customer which could be one of the following: email-address, phone-number, domain-name, BVN, NUBAN Account, Images
    * @returns {Promise<CheckCustomerKarmaResponse>}
    */
   async checkCustomerKarma(
