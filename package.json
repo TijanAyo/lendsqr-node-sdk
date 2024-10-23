@@ -1,10 +1,11 @@
 {
   "name": "lendsqr-nodesdk",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
   "author": "TijanAyo <ayomidetijani6@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
@@ -14,7 +15,6 @@
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.13",
     "jest": "^29.7.0",
-    "nodemon": "^3.1.7",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
