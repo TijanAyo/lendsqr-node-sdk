@@ -16,7 +16,7 @@ interface ConsumerDetails {
   identification: Identification;
 }
 
-interface CreditSummary {
+interface CreditSummaryCRC {
   last_reported_date: string;
   has_creditfacilities: string;
   no_of_delinqcreditfacilities: string;
@@ -35,10 +35,10 @@ interface CRCData {
   consumer_relation: string;
   last_checked_date: string;
   credit_nano_summary: {
-    summary: CreditSummary;
+    summary: CreditSummaryCRC;
   };
   mfcredit_nano_summary: {
-    summary: CreditSummary;
+    summary: CreditSummaryCRC;
   };
   mgcredit_nano_summary: {
     summary: {
@@ -99,7 +99,7 @@ interface PersonalDetails {
   ResidentialAddress4: string;
 }
 
-interface CreditSummary {
+interface CreditSummaryFirstCental {
   NumberofAccountsInBadStanding: string;
   TotalNumberOfAccountsReported: string;
   NumberOfAccountsInGoodStanding: string;
@@ -122,7 +122,7 @@ interface EnquiryDetail {
 interface FirstCentralData {
   SubjectList?: Subject[];
   PersonalDetailsSummary?: PersonalDetails[];
-  CreditSummary?: CreditSummary[];
+  CreditSummary?: CreditSummaryFirstCental[];
   PerformanceClassification?: PerformanceClassification[];
   EnquiryDetails?: EnquiryDetail[];
 }

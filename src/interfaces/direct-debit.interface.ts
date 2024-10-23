@@ -57,18 +57,18 @@ export interface VerifyAccountNumberResponse {
   meta: Meta;
 }
 
-enum DebitType {
+export enum DebitType {
   All = "all",
   Partial = "partial",
 }
 
-enum Frequency {
+export enum Frequency {
   Daily = "daily",
   Weekly = "weekly",
   Monthly = "monthly",
 }
 
-enum MandateType {
+export enum MandateTypes {
   Emandate = "emandate",
   Manual = "manual",
 }
@@ -78,12 +78,12 @@ enum FileExtension {
   Png = "png",
 }
 
-enum MandateStatus {
+export enum MandateStatus {
   Success = "success",
   Initiated = "initiated",
 }
 
-enum MandateType {
+export enum MandateType {
   Activate = "activate",
   Deactivate = "deactivate",
 }
@@ -94,14 +94,18 @@ export interface CreateMandatePaylod {
   debit_type: DebitType;
   frequency: Frequency;
   bank_id: number;
+  bank_code?: string;
+  number_of_payments?: number;
+  payment_start_date?: string;
+  invite?: boolean;
   email: string;
   start_date: string;
   end_date: string;
-  narration: string;
-  address: string;
+  narration?: string;
+  address?: string;
   amount: number;
   schedule?: boolean | number; // TODO: Get more information about this field (is it required or optional)
-  type: MandateType;
+  type: MandateTypes;
   file_base64: string;
   file_extension?: FileExtension;
 }
@@ -127,7 +131,7 @@ export interface CreateMandateResponse {
     amount: string;
     status: MandateStatus;
     schedule: number;
-    type: MandateType;
+    type: MandateTypes;
     NIBSS_workflow_status: string | null;
     NIBSS_workflow_status_description: string | null;
     debit_type: DebitType;
@@ -201,9 +205,9 @@ export interface GetMandateDetailsResponse {
     data: Mandate[];
     meta: {
       records: number;
-      page: number;
+      page: string;
       pages: number;
-      page_size: number;
+      page_size: string;
     };
   };
   meta: Meta;
@@ -243,7 +247,7 @@ export interface DebitMandateResponse {
   };
 }
 
-export interface GetMandateAccountBalanceResponse {
+export interface CheckMandateAccountBalanceResponse {
   status: string;
   message: string;
   data: {
@@ -254,6 +258,12 @@ export interface GetMandateAccountBalanceResponse {
   };
 }
 
+interface _MandateBank {
+  name: string;
+  bank_code: string;
+  institution_code: string;
+  url: null | string;
+}
 interface MandateDetail {
   id: number;
   amount: string;
@@ -266,15 +276,8 @@ interface MandateDetail {
   session_id: string;
   status: string;
   created_on: string;
-  mandate_bank: MandateBank | Bank;
+  mandate_bank: _MandateBank | Bank;
   mandate: MandateReference;
-}
-
-interface MandateBank {
-  name: string;
-  bank_code: string;
-  institution_code: string;
-  url: string | null;
 }
 
 interface MandateReference {

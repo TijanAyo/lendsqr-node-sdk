@@ -2,13 +2,13 @@ import { BaseResource } from "./base";
 import {
   CancelMandateResponse,
   CancelMandateType,
+  CheckMandateAccountBalanceResponse,
   CreateMandatePaylod,
   CreateMandateResponse,
   DebitMandateResponse,
   GetAllBanksResponse,
   GetAllMandateTransactionResponse,
   GetBankDetailsResponse,
-  GetMandateAccountBalanceResponse,
   GetMandateDetailsResponse,
   GetMandateSummaryResponse,
   GetMandateTransactionDetailsResponse,
@@ -91,6 +91,10 @@ export class DirectDebit extends BaseResource {
       debit_type: data.debit_type,
       frequency: data.frequency,
       bank_id: data.bank_id,
+      bank_code: data.bank_code,
+      number_of_payments: data.number_of_payments,
+      payment_start_date: data.payment_start_date,
+      invite: data.invite,
       email: data.email,
       start_date: data.start_date,
       end_date: data.end_date,
@@ -120,15 +124,13 @@ export class DirectDebit extends BaseResource {
    */
   async getAllMandates(
     limit: number = 10,
-    page: number = 1,
-    reference_number?: string
+    page: number = 1
   ): Promise<GetMandateDetailsResponse> {
     const path = `/direct-debit/mandates`;
 
     const params = {
       limit,
       page,
-      reference_number,
     };
 
     return this.request<GetMandateDetailsResponse>("GET", path, params);
@@ -207,18 +209,18 @@ export class DirectDebit extends BaseResource {
   /**
    * Retrieves the balance of the account associated with a mandate
    * @param {string} reference_number
-   * @returns { Promise<GetMandateAccountBalanceResponse>}
+   * @returns { Promise<CheckMandateAccountBalanceResponse>}
    */
-  async getMandateAccountBalance(
+  async checkMandateAccountBalance(
     reference_number: string
-  ): Promise<GetMandateAccountBalanceResponse> {
+  ): Promise<CheckMandateAccountBalanceResponse> {
     const path = `/direct-debit/banks/balance-lookup`;
 
     const payload = {
       reference_number,
     };
 
-    return this.request<GetMandateAccountBalanceResponse>(
+    return this.request<CheckMandateAccountBalanceResponse>(
       "POST",
       path,
       undefined,
