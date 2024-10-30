@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosError } from "axios";
 
-import { LendSqrAPIError } from "./utils";
+import { LendSqrAPIError, LendSqrSDKError } from "./utils";
 import {
   CreditBureaus,
   DataForLenders,
@@ -55,12 +55,13 @@ export class Lendsqr {
       const response = await this.axiosInstance.request<T>(config);
       return response.data;
     } catch (error) {
-      if (error.response) {
+      if (error instanceof AxiosError && error.response) {
         if (error.response.status === 404) {
           return error.response.data;
         }
+        throw new LendSqrAPIError(error);
       }
-      throw new LendSqrAPIError(error);
+      throw new LendSqrSDKError(error);
     }
   }
 }
