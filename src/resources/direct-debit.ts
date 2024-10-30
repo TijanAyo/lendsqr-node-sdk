@@ -62,57 +62,25 @@ export class DirectDebit extends BaseResource {
   ): Promise<VerifyAccountNumberResponse> {
     const path = `/direct-debit/banks/account-lookup`;
 
-    const payload = {
-      account_number: data.account_number,
-      bank_code: data.bank_code,
-    };
-
     return this.request<VerifyAccountNumberResponse>(
       "POST",
       path,
       undefined,
-      payload
+      data
     );
   }
 
   /**
    * Allows you to create a mandate on a customer's account
    * @param {CreateMandatePaylod} data
-   * @returns
+   * @returns {Promise<CreateMandateResponse>}
    */
   async createMandate(
     data: CreateMandatePaylod
   ): Promise<CreateMandateResponse> {
     const path = `/direct-debit/mandates`;
 
-    const payload = {
-      account_number: data.account_number,
-      phone_number: data.phone_number,
-      debit_type: data.debit_type,
-      frequency: data.frequency,
-      bank_id: data.bank_id,
-      bank_code: data.bank_code,
-      number_of_payments: data.number_of_payments,
-      payment_start_date: data.payment_start_date,
-      invite: data.invite,
-      email: data.email,
-      start_date: data.start_date,
-      end_date: data.end_date,
-      narration: data.narration,
-      address: data.address,
-      amount: data.amount,
-      schedule: data.schedule,
-      type: data.type,
-      file_base64: data.file_base64,
-      file_extension: data.file_extension,
-    };
-
-    return this.request<CreateMandateResponse>(
-      "POST",
-      path,
-      undefined,
-      payload
-    );
+    return this.request<CreateMandateResponse>("POST", path, undefined, data);
   }
 
   /**

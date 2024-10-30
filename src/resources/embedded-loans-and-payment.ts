@@ -30,20 +30,7 @@ export class EmbeddedLoansAndPayments extends BaseResource {
   ): Promise<InitializeLoanResponse> {
     const path = `/loans/initialize`;
 
-    const payload = {
-      product_id: data.product_id,
-      meta: {
-        email: data.meta.email,
-        phone_number: data.meta.phone_number,
-      },
-    };
-
-    return this.request<InitializeLoanResponse>(
-      "POST",
-      path,
-      undefined,
-      payload
-    );
+    return this.request<InitializeLoanResponse>("POST", path, undefined, data);
   }
 
   /**
@@ -68,18 +55,11 @@ export class EmbeddedLoansAndPayments extends BaseResource {
   ): Promise<InitializePaymentResponse> {
     const path = `payments/initialize`;
 
-    const payload = {
-      amount: data.amount,
-      description: data.description,
-      callback_url: data.callback_url,
-      organization_id: data.organization_id,
-    };
-
     return this.request<InitializePaymentResponse>(
       "POST",
       path,
       undefined,
-      payload
+      data
     );
   }
 

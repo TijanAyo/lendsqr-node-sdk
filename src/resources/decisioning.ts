@@ -40,35 +40,11 @@ export class Decisioning extends BaseResource {
   ): Promise<OraculiBorrowerScoringResponse> {
     const path = `/decisioning/models/${id}`;
 
-    const payload = {
-      gender: data.gender,
-      marital_status: data.marital_status,
-      age: data.age,
-      location: data.location,
-      no_of_dependent: data.no_of_dependent,
-      type_of_residence: data.type_of_residence,
-      educational_attainment: data.educational_attainment,
-      employment_status: data.employment_status,
-      sector_of_employment: data.sector_of_employment,
-      monthly_net_income: data.monthly_net_income,
-      employer_category: data.employer_category,
-      bvn: data.bvn,
-      phone_number: data.phone_number,
-      total_years_of_experience: data.total_years_of_experience,
-      time_with_current_employer: data.time_with_current_employer,
-      previous_lendsqr_loans: data.previous_lendsqr_loans,
-      phone: data.phone,
-      bvn_phone: data.bvn_phone,
-      office_email: data.office_email,
-      personal_email: data.personal_email,
-      amount: data.amount,
-    };
-
     return this.request<OraculiBorrowerScoringResponse>(
       "POST",
       path,
       undefined,
-      payload
+      data
     );
   }
 }
